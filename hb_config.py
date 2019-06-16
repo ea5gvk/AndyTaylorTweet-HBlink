@@ -196,7 +196,53 @@ def build_config(_config_file):
                         'LAST_PING_TX_TIME': 0,
                         'LAST_PING_ACK_TIME': 0,
                     }})
-        
+
+                elif config.get(section, 'MODE') == 'XLXPEER':
+                    CONFIG['SYSTEMS'].update({section: {
+                        'MODE': config.get(section, 'MODE'),
+                        'ENABLED': config.getboolean(section, 'ENABLED'),
+                        'LOOSE': config.getboolean(section, 'LOOSE'),
+                        'SOCK_ADDR': (gethostbyname(config.get(section, 'IP')), config.getint(section, 'PORT')),
+                        'IP': gethostbyname(config.get(section, 'IP')),
+                        'PORT': config.getint(section, 'PORT'),
+                        'MASTER_SOCKADDR': (gethostbyname(config.get(section, 'MASTER_IP')), config.getint(section, 'MASTER_PORT')),
+                        'MASTER_IP': gethostbyname(config.get(section, 'MASTER_IP')),
+                        'MASTER_PORT': config.getint(section, 'MASTER_PORT'),
+                        'PASSPHRASE': config.get(section, 'PASSPHRASE'),
+                        'CALLSIGN': config.get(section, 'CALLSIGN').ljust(8)[:8],
+                        'RADIO_ID': hex(int(config.get(section, 'RADIO_ID')))[2:].rjust(8,'0').decode('hex'),
+                        'RX_FREQ': config.get(section, 'RX_FREQ').ljust(9)[:9],
+                        'TX_FREQ': config.get(section, 'TX_FREQ').ljust(9)[:9],
+                        'TX_POWER': config.get(section, 'TX_POWER').rjust(2,'0'),
+                        'COLORCODE': config.get(section, 'COLORCODE').rjust(2,'0'),
+                        'LATITUDE': config.get(section, 'LATITUDE').ljust(8)[:8],
+                        'LONGITUDE': config.get(section, 'LONGITUDE').ljust(9)[:9],
+                        'HEIGHT': config.get(section, 'HEIGHT').rjust(3,'0'),
+                        'LOCATION': config.get(section, 'LOCATION').ljust(20)[:20],
+                        'DESCRIPTION': config.get(section, 'DESCRIPTION').ljust(19)[:19],
+                        'SLOTS': config.get(section, 'SLOTS'),
+                        'URL': config.get(section, 'URL').ljust(124)[:124],
+                        'SOFTWARE_ID': config.get(section, 'SOFTWARE_ID').ljust(40)[:40],
+                        'PACKAGE_ID': config.get(section, 'PACKAGE_ID').ljust(40)[:40],
+                        'GROUP_HANGTIME': config.getint(section, 'GROUP_HANGTIME'),
+                        'XLXMODULE': config.get(section, 'XLXMODULE').ljust(4)[:4],
+                        'OPTIONS': '',
+                        'USE_ACL': 'True',
+                        'SUB_ACL': 'DENY:1-999999',
+                        'TG1_ACL': 'PERMIT:9,4000-5000',
+                        'TG2_ACL': 'PERMIT:9,4000-5000'
+                    }})
+                    CONFIG['SYSTEMS'][section].update({'STATS': {
+                        'CONNECTION': 'NO',             # NO, RTPL_SENT, AUTHENTICATED, CONFIG-SENT, YES 
+                        'CONNECTED': None,
+                        'PINGS_SENT': 0,
+                        'PINGS_ACKD': 0,
+                        'NUM_OUTSTANDING': 0,
+                        'PING_OUTSTANDING': False,
+                        'LAST_PING_TX_TIME': 0,
+                        'LAST_PING_ACK_TIME': 0,
+                    }})
+
                 elif config.get(section, 'MODE') == 'MASTER':
                     CONFIG['SYSTEMS'].update({section: {
                         'MODE': config.get(section, 'MODE'),
