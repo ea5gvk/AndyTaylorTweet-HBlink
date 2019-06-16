@@ -9,7 +9,7 @@ DVSwitch@groups.io
 
 ## PROJECT: Open Source HomeBrew Repeater Proctol Client/Master. ##
 
-**UPDATES:**
+**UPDATES:** Minor modifications to support direct linking to XLX via DMR/MMDVMHost protocol (MW0MWZ).
 
 **PURPOSE:** Thanks to the work of Jonathan Naylor, G4KLX; Hans Barthen, DL5DI; Torsten Shultze, DG1HT we have an open protocol for internetworking DMR repeaters. Unfortunately, there's no generic client and/or master stacks. This project is to build an open-source, python-based implementation. This is a non-commercial license. Atribution is *required* if you use it.
 
