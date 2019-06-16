@@ -337,6 +337,9 @@ class routerOBP(OPENBRIDGE):
                                     #if (_stream_id != self.STATUS[_slot]['RX_STREAM_ID']) or (_target_status[_target['TS']]['TX_RFS'] != _rf_src) or (_target_status[_target['TS']]['TX_TGID'] != _target['TGID']):
                                         # Record the DST TGID and Stream ID
                                         _target_status[_target['TS']]['TX_START'] = pkt_time
+                                        if CONFIG['SYSTEMS'][self._system]['MODE'] == 'XLXPEER':
+                                             # Munge the destination TGID for XLXs
+                                             _target['TGID'] = hex_str_3(int(CONFIG['SYSTEMS'][self._system]['XLXMODULE']))
                                         _target_status[_target['TS']]['TX_TGID'] = _target['TGID']
                                         _target_status[_target['TS']]['TX_STREAM_ID'] = _stream_id
                                         _target_status[_target['TS']]['TX_RFS'] = _rf_src
@@ -585,9 +588,9 @@ class routerHBP(HBSYSTEM):
                                         if (_stream_id != self.STATUS[_slot]['RX_STREAM_ID']) or (_target_status[_target['TS']]['TX_RFS'] != _rf_src) or (_target_status[_target['TS']]['TX_TGID'] != _target['TGID']):
                                              # Record the DST TGID and Stream ID
                                              _target_status[_target['TS']]['TX_START'] = pkt_time
-                                             if CONFIG['SYSTEMS'][system]['MODE'] == 'XLXPEER':
-                                                # Munge the destination TGID for XLXs
-						_target['TGID'] = hex_str_3(int(CONFIG['SYSTEMS'][system]['XLXMODULE']))
+                                             if CONFIG['SYSTEMS'][self._system]['MODE'] == 'XLXPEER':
+                                                  # Munge the destination TGID for XLXs
+                                                  _target['TGID'] = hex_str_3(int(CONFIG['SYSTEMS'][self._system]['XLXMODULE']))
                                              _target_status[_target['TS']]['TX_TGID'] = _target['TGID']
                                              _target_status[_target['TS']]['TX_STREAM_ID'] = _stream_id
                                              _target_status[_target['TS']]['TX_RFS'] = _rf_src
